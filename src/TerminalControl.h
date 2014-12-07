@@ -35,8 +35,8 @@ public slots:
     void update(QString data);
 
 private:
-    void calculateWindowSize();
-    void setTerminalFont();
+    void calculateFaceSize();
+    void setTerminalFace();
 
     bb::cascades::Container *m_rootContainer;
     bb::cascades::ScrollView *m_scrollView;
