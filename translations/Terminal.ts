@@ -11,9 +11,5 @@
         <source>Tab 2</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Second tab</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>

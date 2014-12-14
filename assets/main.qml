@@ -8,62 +8,22 @@ TabbedPane {
     Tab { //First tab
         // Localized text with the dynamic translation and locale updates support
         title: qsTr("Tab 1") + Retranslate.onLocaleOrLanguageChanged
-        Page {
-            TerminalControl {
-                id: terminalControl
-            }
-
-            actionBarVisibility: ChromeVisibility.Visible
-            actions: [
-                ActionItem {
-                    title: "Tab"
-                    imageSource: "asset:///tab.png"
-                    ActionBar.placement: ActionBarPlacement.OnBar
-                    onTriggered: {
-                        terminalControl.write("\x09");
-                    }
-                },
-                ActionItem {
-                    title: "Control-C"
-                    imageSource: "asset:///control-c.png"
-                    ActionBar.placement: ActionBarPlacement.OnBar
-                    onTriggered: {
-                        terminalControl.write("\x03")
-                    }
-                },
-                ActionItem {
-                    title: "Escape"
-                    imageSource: "asset:///esc.png"
-                    ActionBar.placement: ActionBarPlacement.OnBar
-                    onTriggered: {
-                        terminalControl.write("\x1b");
-                    }
-                },
-                ActionItem {
-                    title: "Control-D"
-                    imageSource: "asset:///control-d.png"
-                    onTriggered: {
-                        terminalControl.write("\x04")
-                    }
-                },
-                ActionItem {
-                    title: "Control-Z"
-                    imageSource: "asset:///control-z.png"
-                    onTriggered: {
-                        terminalControl.write("\x1a")
-                    }
-                }
-            ]
+        id: tab1
+        delegate: Delegate {
+            id: tab1Delegate
+            source: "TerminalPage.qml"
         }
+        // Note that our TabDelegateActivationPolicy *must not* be Default or ActivatedWhileSelected.
+        // Otherwise our terminal controller will be destroyed when we switch tabs, and we lose state.
+        delegateActivationPolicy: TabDelegateActivationPolicy.ActivateWhenSelected
     }
     Tab {
         title: qsTr("Tab 2") + Retranslate.onLocaleOrLanguageChanged
-        Page {
-            Container {
-                Label {
-                    text: qsTr("Second tab") + Retranslate.onLocaleOrLanguageChanged
-                }
-            }
+        id: tab2
+        delegate: Delegate {
+            id: tab2Delegate
+            source: "TerminalPage.qml"
         }
+        delegateActivationPolicy: TabDelegateActivationPolicy.ActivateWhenSelected       
     }
 }
